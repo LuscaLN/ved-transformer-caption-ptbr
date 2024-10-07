@@ -39,6 +39,7 @@ import re
 import torch
 
 from datasets import load_from_disk
+from datasets import load_dataset
 from torch.utils.data import DataLoader
 
 
@@ -112,7 +113,7 @@ def load_datasets(data_dir, step='train'):
         test_ds = load_from_disk(os.path.join(data_dir, 'test.hf')) #.select(range(16))
     elif step=='eval':
         train_ds, valid_ds = None, None
-        test_ds = load_from_disk(os.path.join(data_dir, 'test.hf')) #.select(range(16))
+        test_ds = load_dataset('laicsiifes/flickr30k-pt-br', split="test") #.select(range(16))
     else:
         raise Exception("The parameters `step` needs to be equals to `train` or `eval`")
     return train_ds, valid_ds, test_ds
